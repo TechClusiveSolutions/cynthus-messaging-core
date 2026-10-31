@@ -1,0 +1,9 @@
+from cynthus.messaging.common.signal_message import SignalMessage
+
+from cynthus.messaging.component.system.payload.system_authentication_updated import (
+    SystemAuthenticationUpdatedPayload,
+)
+
+
+class SystemAuthenticationUpdatedMessage(SignalMessage[SystemAuthenticationUpdatedPayload]):
+    event_type: str = "system.authentication.updated"
