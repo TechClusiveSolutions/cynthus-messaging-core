@@ -6,7 +6,7 @@ Group meal voting allows workspace members to collectively choose from proposed 
 
 ## Vote lifecycle
 
-```
+```text
 cynthus-core-api publishes: public.meal.vote.initiated
         │
         ▼
