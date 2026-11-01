@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'cynthus-core').is_dir())
+ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / 'src'
 
 if str(SRC) not in sys.path:
