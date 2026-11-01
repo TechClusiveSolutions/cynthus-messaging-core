@@ -1,6 +1,8 @@
 """Signal Message class for the Cynthus project"""
 
-from typing import Generic, TypeVar
+from typing import Generic
+
+from typing_extensions import TypeVar
 
 from .message_base import SignalMessageBase
 from .payload import SignalPayload
