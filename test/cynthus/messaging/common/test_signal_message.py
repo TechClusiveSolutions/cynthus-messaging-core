@@ -1,6 +1,5 @@
 """Signal Message tests for the Cynthus project"""
 
-import pytest
 
 from uuid import uuid4
 
@@ -29,4 +28,3 @@ class TestSignalMessage:
         )
 
         assert isinstance(message, SignalPart)
-            

@@ -1,13 +1,12 @@
 """Fixture factory for MealSuggestionRejectedPayload"""
 
-import factory
-
 from typing import Optional
 from uuid import UUID, uuid4
 
+import factory
+
 from .....common.signal import DecisionReason
 from .....component.meal.payload import MealSuggestionRejectedPayload
-
 from ...base_payload_factory import BasePayloadFactory
 
 

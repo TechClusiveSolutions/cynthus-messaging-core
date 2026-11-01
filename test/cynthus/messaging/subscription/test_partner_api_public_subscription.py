@@ -4,7 +4,6 @@
 
 import pytest
 
-
 MODULE = 'cynthus.messaging.subscription.partner_api_public_subscription'
 
 

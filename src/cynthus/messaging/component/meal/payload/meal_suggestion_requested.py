@@ -1,7 +1,8 @@
 """Meal Suggestion Requested signal payload class for the Cynthus project"""
 
-from pydantic import Field
 from uuid import UUID
+
+from pydantic import Field
 
 from ....common import EnergyLevel, SignalPayload, SignalTriggerType
 

@@ -6,7 +6,6 @@ import pytest
 
 from cynthus.messaging.common.signal.trigger_type import SignalTriggerType
 
-
 MEMBERS = [
     ('ACTION_PERFORMED', 'action_performed'),
     ('ANOMALY_DETECTED', 'anomaly_detected'),

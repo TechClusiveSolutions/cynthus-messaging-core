@@ -4,7 +4,6 @@
 
 import pytest
 
-
 MODULE = 'cynthus.messaging.subscription.core_logistics_signal_subscription'
 
 

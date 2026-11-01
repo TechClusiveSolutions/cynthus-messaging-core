@@ -1,10 +1,8 @@
 """Base message factory class for MealSuggestionAcceptedMessage"""
 
-import factory
-
 from uuid import UUID, uuid4
 
-from ...common.signal import LifecycleAction
+import factory
 
 
 class BaseMessageFactory(factory.Factory):
@@ -17,4 +15,3 @@ class BaseMessageFactory(factory.Factory):
     actor_id: UUID = factory.LazyFunction(uuid4)
     organization_id: UUID = factory.LazyFunction(uuid4)
     workspace_id: UUID = factory.LazyFunction(uuid4)
-        

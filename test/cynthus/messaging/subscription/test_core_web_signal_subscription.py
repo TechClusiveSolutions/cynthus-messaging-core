@@ -4,7 +4,6 @@
 
 import pytest
 
-
 MODULE = 'cynthus.messaging.subscription.core_web_signal_subscription'
 
 

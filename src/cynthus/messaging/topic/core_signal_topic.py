@@ -11,4 +11,3 @@ class CoreSignalTopic(BaseModel):
     """
 
     name: str = 'cynthus-topic-public'
-    

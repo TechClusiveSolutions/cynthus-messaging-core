@@ -15,9 +15,9 @@ class SignalTriggerType(str, Enum):
 
     # An actor failed to authenticate
     AUTHENTICATION_FAILED: str = 'authentication_failed'
-   
+
     # A threshold was reached
     THRESHOLD_REACHED: str = 'threshold_reached'
-    
+
     # A timer expired
     TIMER_EXPIRED: str = 'timer_expired'

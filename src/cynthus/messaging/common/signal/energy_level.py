@@ -9,4 +9,3 @@ class EnergyLevel(int, Enum):
     MEDIUM: int = 5
     HIGH: int = 7
     VERY_HIGH: int = 9
-        

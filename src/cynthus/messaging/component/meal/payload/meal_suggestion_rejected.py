@@ -1,8 +1,9 @@
 """Meal Suggestion Rejected signal payload class for the Cynthus project"""
 
-from pydantic import Field
 from typing import Optional
 from uuid import UUID
+
+from pydantic import Field
 
 from ....common import DecisionReason, SignalPayload
 

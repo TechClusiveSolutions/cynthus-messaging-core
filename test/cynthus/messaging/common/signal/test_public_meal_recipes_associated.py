@@ -5,8 +5,8 @@
 from cynthus.messaging.common.signal.action_type import SignalActionType
 from cynthus.messaging.common.signal.base import SignalBase
 from cynthus.messaging.common.signal.domain_type import SignalDomainType
-from cynthus.messaging.common.signal.public_meal_recipes_base import PublicMealRecipesSignalBase
 from cynthus.messaging.common.signal.public_meal_recipes_associated import PublicMealRecipesAssociatedSignal
+from cynthus.messaging.common.signal.public_meal_recipes_base import PublicMealRecipesSignalBase
 
 
 def test_name_is_the_dotted_signal_name():

@@ -1,6 +1,5 @@
 """Base test class for message classes in the Cynthus project"""
 
-import pytest
 
 
 class BaseMessageTest:
@@ -13,7 +12,7 @@ class BaseMessageTest:
         # Does the message object have the expected event_type value?
         # Does the message object have the expected lifecycle action value?
 
-        pass        
+        pass
 
     def test_required_fields(self):
         # Does omitting required fields result in an exception?

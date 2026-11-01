@@ -5,7 +5,6 @@ from typing import Generic, TypeVar
 from .message_base import SignalMessageBase
 from .payload import SignalPayload
 
-
 PayloadT = TypeVar('PayloadT', bound=SignalPayload, default=SignalPayload)
 
 

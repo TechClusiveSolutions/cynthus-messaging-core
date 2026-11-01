@@ -6,7 +6,6 @@ from datetime import datetime, timezone
 from uuid import UUID, uuid4
 
 import pytest
-
 from pydantic import ValidationError
 
 from cynthus.messaging.common.signal.lifecycle_action import LifecycleAction

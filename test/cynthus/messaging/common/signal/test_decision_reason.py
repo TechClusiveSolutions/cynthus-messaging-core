@@ -6,7 +6,6 @@ import pytest
 
 from cynthus.messaging.common.signal.decision_reason import DecisionReason
 
-
 MEMBERS = [
     ('NOT_ENOUGH_ENERGY', 'not_enough_energy'),
     ('NOT_ENOUGH_TIME', 'not_enough_time'),

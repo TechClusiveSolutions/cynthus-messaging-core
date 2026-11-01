@@ -6,10 +6,6 @@ from uuid import UUID
 
 import pytest
 
-from cynthus.messaging.common.signal.decision_reason import DecisionReason
-from cynthus.messaging.common.signal.energy_level import EnergyLevel
-from cynthus.messaging.common.signal.trigger_type import SignalTriggerType
-
 
 @pytest.fixture(scope='module')
 def factory(import_or_xfail):
@@ -41,7 +37,7 @@ def test_identifiers_are_fresh_uuids(factory):
 def test_defaults(factory):
     payload = factory()
 
-    assert True
+    assert payload is not None
 
 
 def test_values_can_be_overridden(factory):

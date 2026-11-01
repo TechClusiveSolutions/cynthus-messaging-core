@@ -1,8 +1,9 @@
 """Signal Message Base class for the Cynthus project"""
 
 from datetime import datetime, timezone
-from pydantic import Field
 from uuid import UUID, uuid4
+
+from pydantic import Field
 
 from .lifecycle_action import LifecycleAction
 from .part import SignalPart

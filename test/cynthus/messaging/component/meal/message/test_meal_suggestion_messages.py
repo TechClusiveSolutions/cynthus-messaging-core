@@ -1,41 +1,33 @@
 """Meal Suggestion Message tests for the Cynthus project"""
 
-import pytest
 import re
-
 from uuid import UUID, uuid4
 
-from cynthus.messaging.common.signal import (
-    EnergyLevel,
-    DecisionReason,
-    LifecycleAction,
-    SignalTriggerType,
+import pytest
 
+from cynthus.messaging.common.signal import (
+    DecisionReason,
+    EnergyLevel,
+    LifecycleAction,
     PublicMealSuggestionAcceptedSignal,
     PublicMealSuggestionGeneratedSignal,
     PublicMealSuggestionRejectedSignal,
-    PublicMealSuggestionRequestedSignal
+    PublicMealSuggestionRequestedSignal,
+    SignalTriggerType,
 )
-
 from cynthus.messaging.component.meal.message import (
     MealSuggestionAcceptedMessage,
     MealSuggestionGeneratedMessage,
     MealSuggestionRejectedMessage,
-    MealSuggestionRequestedMessage
+    MealSuggestionRequestedMessage,
 )
-
 from cynthus.messaging.component.meal.payload import (
-    MealSuggestionAcceptedPayload,
-    MealSuggestionGeneratedPayload,
     MealSuggestionRejectedPayload,
-    MealSuggestionRequestedPayload,
 )
-
 from cynthus.messaging.test.factory.meal import (
     MealSuggestionAcceptedMessageFactory,
-    MealSuggestionGeneratedMessageFactory,
     MealSuggestionRejectedMessageFactory,
-    MealSuggestionRequestedMessageFactory
+    MealSuggestionRequestedMessageFactory,
 )
 
 

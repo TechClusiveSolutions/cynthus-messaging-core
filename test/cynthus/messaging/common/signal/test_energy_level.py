@@ -6,7 +6,6 @@ import pytest
 
 from cynthus.messaging.common.signal.energy_level import EnergyLevel
 
-
 MEMBERS = [
     ('VERY_LOW', 1),
     ('LOW', 3),

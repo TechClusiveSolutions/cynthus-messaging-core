@@ -1,7 +1,6 @@
 """Meal Suggestion Generated signal message for the Cynthus project"""
 
 from ....common import PublicMealSuggestionGeneratedSignal, SignalMessage
-
 from ..payload import MealSuggestionGeneratedPayload
 
 

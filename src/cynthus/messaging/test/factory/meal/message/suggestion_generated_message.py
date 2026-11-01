@@ -2,12 +2,10 @@
 
 import factory
 
-from .....common.signal import LifecycleAction, SignalPayload, PublicMealSuggestionGeneratedSignal
+from .....common.signal import LifecycleAction, PublicMealSuggestionGeneratedSignal, SignalPayload
 from .....component.meal.message import MealSuggestionGeneratedMessage
-
-from .suggestion_generated_payload import MealSuggestionGeneratedPayloadFactory
-
 from ...base_message_factory import BaseMessageFactory
+from .suggestion_generated_payload import MealSuggestionGeneratedPayloadFactory
 
 
 class MealSuggestionGeneratedMessageFactory(BaseMessageFactory):
@@ -17,4 +15,3 @@ class MealSuggestionGeneratedMessageFactory(BaseMessageFactory):
     event_type: str = PublicMealSuggestionGeneratedSignal.name
     lifecycle_action: str = LifecycleAction.CREATED
     payload: SignalPayload = factory.SubFactory(MealSuggestionGeneratedPayloadFactory)
-        

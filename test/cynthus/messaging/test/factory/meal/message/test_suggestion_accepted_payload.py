@@ -7,8 +7,6 @@ from uuid import UUID
 import pytest
 
 from cynthus.messaging.common.signal.decision_reason import DecisionReason
-from cynthus.messaging.common.signal.energy_level import EnergyLevel
-from cynthus.messaging.common.signal.trigger_type import SignalTriggerType
 
 
 @pytest.fixture(scope='module')

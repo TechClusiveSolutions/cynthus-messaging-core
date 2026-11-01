@@ -5,26 +5,19 @@ from uuid import UUID
 import pytest
 
 from cynthus.messaging.common.signal import (
-    EnergyLevel,
-    DecisionReason,
     LifecycleAction,
-
     PublicMealSuggestionAcceptedSignal,
     PublicMealSuggestionGeneratedSignal,
     PublicMealSuggestionRejectedSignal,
-    PublicMealSuggestionRequestedSignal
+    PublicMealSuggestionRequestedSignal,
 )
-
 from cynthus.messaging.component.meal.message import (
     MealSuggestionAcceptedMessage,
     MealSuggestionGeneratedMessage,
     MealSuggestionRejectedMessage,
-    MealSuggestionRequestedMessage
+    MealSuggestionRequestedMessage,
 )
-
-from cynthus.messaging.test.fixture import (
-    meal_suggestion_accepted_message
-)
+from cynthus.messaging.component.meal.payload import MealSuggestionRejectedPayload
 
 
 class TestMealMessages:

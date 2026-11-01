@@ -5,13 +5,11 @@
 import importlib
 import sys
 import types
-
 from pathlib import Path
 
 import pytest
 
-
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'cynthus-core').is_dir())
 SRC = ROOT / 'src'
 
 if str(SRC) not in sys.path:
@@ -172,13 +170,13 @@ except Exception as error:
 
 # Pre-existing fixtures shipped with the package (cynthus.messaging.test) - available when they import.
 try:
+    from cynthus.messaging.test.factory.meal.message.plan_created import meal_plan_created_message  # noqa: F401
     from cynthus.messaging.test.fixture import (  # noqa: F401
         meal_suggestion_accepted_message,
         meal_suggestion_generated_message,
         meal_suggestion_rejected_message,
         meal_suggestion_requested_message,
     )
-    from cynthus.messaging.test.factory.meal.message.plan_created import meal_plan_created_message  # noqa: F401
 except Exception as error:
     SHIM['fixtures'] = _describe(error)
 
