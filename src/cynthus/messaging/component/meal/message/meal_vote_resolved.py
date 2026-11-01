@@ -1,7 +1,6 @@
 """Meal Vote Resolved signal message for the Cynthus project"""
 
 from ....common import PublicMealVoteResolvedSignal, SignalMessage
-
 from ..payload import MealVoteResolvedPayload
 
 

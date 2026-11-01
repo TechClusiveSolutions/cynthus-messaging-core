@@ -6,7 +6,6 @@ import importlib
 
 import pytest
 
-
 EXPECTED = [
     'PublicSubscription',
     'CoreAPISignalSubscription',
@@ -14,11 +13,13 @@ EXPECTED = [
 
 
 def _require_importable(shim, known_broken):
-    if shim['subscription'] is not None:
-        if 'cynthus.messaging.subscription' in known_broken:
-            pytest.xfail(f'cynthus.messaging.subscription cannot be imported: {shim['subscription']}')
+    reason = shim['subscription']
 
-        pytest.fail(f'cynthus.messaging.subscription cannot be imported: {shim['subscription']}')
+    if reason is not None:
+        if 'cynthus.messaging.subscription' in known_broken:
+            pytest.xfail(f'cynthus.messaging.subscription cannot be imported: {reason}')
+
+        pytest.fail(f'cynthus.messaging.subscription cannot be imported: {reason}')
 
 
 def test_package_imports_without_stand_ins(shim, known_broken):

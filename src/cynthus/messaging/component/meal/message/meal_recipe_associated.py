@@ -1,7 +1,6 @@
 """Meal Recipes Associated signal message for the Cynthus project"""
 
 from ....common import PublicMealRecipesAssociatedSignal, SignalMessage
-
 from ..payload import MealRecipesAssociatedPayload
 
 

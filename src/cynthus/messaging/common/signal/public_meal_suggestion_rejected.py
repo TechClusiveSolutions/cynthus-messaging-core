@@ -8,4 +8,3 @@ class PublicMealSuggestionRejectedSignal(PublicMealSuggestionSignalBase):
     """Concrete signal: public.meal.suggestion.rejected"""
 
     action = SignalActionType.REJECTED
-    

@@ -1,8 +1,4 @@
 # Meal Plans
-from .plan.meal_plan_created import MealPlanCreatedPayload
-from .plan.meal_plan_deleted import MealPlanDeletedPayload
-from .plan.meal_plan_updated import MealPlanUpdatedPayload
-
 # Meal Ratings
 from .meal_rating_created import MealRatingCreatedPayload
 from .meal_rating_deleted import MealRatingDeletedPayload
@@ -26,3 +22,6 @@ from .meal_vote_auto_resolved import MealVoteAutoResolvedPayload
 from .meal_vote_cast import MealVoteCastPayload
 from .meal_vote_initiated import MealVoteInitiatedPayload
 from .meal_vote_resolved import MealVoteResolvedPayload
+from .plan.meal_plan_created import MealPlanCreatedPayload
+from .plan.meal_plan_deleted import MealPlanDeletedPayload
+from .plan.meal_plan_updated import MealPlanUpdatedPayload

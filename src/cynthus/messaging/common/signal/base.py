@@ -34,4 +34,3 @@ class SignalBase(metaclass=_SignalMeta):
                 raise TypeError(
                     f'{cls.__name__} must define the following signal component(s): {", ".join(missing)}'
                 )
-    

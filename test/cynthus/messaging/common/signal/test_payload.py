@@ -5,7 +5,6 @@
 from datetime import datetime, timedelta, timezone
 
 import pytest
-
 from pydantic import ValidationError
 
 from cynthus.messaging.common.signal.part import SignalPart

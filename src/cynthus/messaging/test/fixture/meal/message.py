@@ -6,14 +6,13 @@ from ....component.meal.message import (
     MealSuggestionAcceptedMessage,
     MealSuggestionGeneratedMessage,
     MealSuggestionRejectedMessage,
-    MealSuggestionRequestedMessage
+    MealSuggestionRequestedMessage,
 )
-
 from ....test.factory.meal import (
     MealSuggestionAcceptedMessageFactory,
     MealSuggestionGeneratedMessageFactory,
     MealSuggestionRejectedMessageFactory,
-    MealSuggestionRequestedMessageFactory
+    MealSuggestionRequestedMessageFactory,
 )
 
 
