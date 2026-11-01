@@ -2,6 +2,6 @@
 
 ## Purpose
 
-the Clinical Signal Created message represents a signal from 
+the Clinical Signal Created message represents a signal from
 
 ## Payload
