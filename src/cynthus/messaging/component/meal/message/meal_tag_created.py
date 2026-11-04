@@ -1,7 +1,6 @@
 """Meal Tag Created signal message for the Cynthus project"""
 
 from ....common import PublicMealTagCreatedSignal, SignalMessage
-
 from ..payload import MealTagCreatedPayload
 
 

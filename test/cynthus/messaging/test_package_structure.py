@@ -4,7 +4,6 @@
 
 import pytest
 
-
 MODULES = [
     'cynthus',
     'cynthus.messaging',

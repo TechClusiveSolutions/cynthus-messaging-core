@@ -6,7 +6,6 @@ import importlib
 
 import pytest
 
-
 EXPECTED = [
     'MealPlanCreatedMessage',
     'MealPlanDeletedMessage',
@@ -29,11 +28,13 @@ EXPECTED = [
 
 
 def _require_importable(shim, known_broken):
-    if shim['meal'] is not None:
-        if 'cynthus.messaging.component.meal.message' in known_broken:
-            pytest.xfail(f'cynthus.messaging.component.meal.message cannot be imported: {shim['meal']}')
+    reason = shim['meal']
 
-        pytest.fail(f'cynthus.messaging.component.meal.message cannot be imported: {shim['meal']}')
+    if reason is not None:
+        if 'cynthus.messaging.component.meal.message' in known_broken:
+            pytest.xfail(f'cynthus.messaging.component.meal.message cannot be imported: {reason}')
+
+        pytest.fail(f'cynthus.messaging.component.meal.message cannot be imported: {reason}')
 
 
 def test_package_imports_without_stand_ins(shim, known_broken):

@@ -1,8 +1,8 @@
 """Meal Plan Created signal payload class for the Cynthus project"""
 
-from datetime import datetime, timezone
+from datetime import datetime
+
 from pydantic import Field
-from uuid import UUID
 
 from .....common import SignalPayload
 

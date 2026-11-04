@@ -1,7 +1,6 @@
 """Meal Suggestion Denied signal message for the Cynthus project"""
 
 from ....common import PublicMealSuggestionRejectedSignal, SignalMessage
-
 from ..payload import MealSuggestionRejectedPayload
 
 

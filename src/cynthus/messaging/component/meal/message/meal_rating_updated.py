@@ -1,7 +1,6 @@
 """Meal Rating Updated signal message for the Cynthus project"""
 
 from ....common import PublicMealRatingUpdatedSignal, SignalMessage
-
 from ..payload import MealRatingUpdatedPayload
 
 

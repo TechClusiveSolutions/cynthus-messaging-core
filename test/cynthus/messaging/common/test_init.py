@@ -6,7 +6,6 @@ import importlib
 
 import pytest
 
-
 EXPORTS = [
     'EnergyLevel',
     'LifecycleAction',

@@ -21,7 +21,7 @@ The `meal` domain covers the full lifecycle of meal planning, AI-driven suggesti
 
 The suggestion lifecycle is the most important flow in the meal domain. Understanding the ordering and ownership of each signal is critical for both Core and Intelligence contributors.
 
-```
+```text
 [User initiates]
        │
        ▼

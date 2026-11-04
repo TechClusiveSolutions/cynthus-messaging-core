@@ -28,7 +28,7 @@ This package covers **`cynthus-topic-public`** signals only. Internal and audit 
 
 Every signal name is a four-part dot-notated string:
 
-```
+```text
 {visibility}.{domain}.{aggregate}.{action}
 ```
 
@@ -72,7 +72,7 @@ All `datetime` fields are serialised as ISO 8601 UTC strings with microsecond pr
 
 ## Document map
 
-```
+```text
 docs/cynthus/messaging/
 ├── index.md                    ← you are here
 ├── common/

@@ -1,8 +1,9 @@
 """Signal Payload class for the Cynthus project"""
 
 from datetime import datetime, timezone
-from pydantic import Field, field_serializer
 from typing import Any, Dict, Optional
+
+from pydantic import Field, field_serializer
 
 from .part import SignalPart
 
@@ -14,7 +15,7 @@ class SignalPayload(SignalPart):
         The baseline contract for all inner message data payloads. Guarantees structural auditability across regulated open/closed boundaries.
     """
 
-    schema_version: int = Field(..., 
+    schema_version: int = Field(...,
     ge=1,
     description='Monotonically increasing version tracker for contract evolution'
     )

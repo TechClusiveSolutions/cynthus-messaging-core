@@ -5,7 +5,6 @@
 from uuid import uuid4
 
 import pytest
-
 from pydantic import Field, ValidationError
 
 from cynthus.messaging.common.signal.lifecycle_action import LifecycleAction

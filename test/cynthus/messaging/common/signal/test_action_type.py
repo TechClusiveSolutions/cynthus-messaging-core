@@ -6,7 +6,6 @@ import pytest
 
 from cynthus.messaging.common.signal.action_type import SignalActionType
 
-
 MEMBERS = [
     ('ACCEPTED', 'accepted'),
     ('ASSOCIATED', 'associated'),

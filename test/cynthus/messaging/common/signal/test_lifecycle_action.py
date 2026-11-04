@@ -6,7 +6,6 @@ import pytest
 
 from cynthus.messaging.common.signal.lifecycle_action import LifecycleAction
 
-
 MEMBERS = [
     ('CREATED', 'created'),
     ('UPDATED', 'updated'),

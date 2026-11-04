@@ -5,9 +5,8 @@
 import pytest
 
 from cynthus.messaging.common.signal.base import SignalBase
-from cynthus.messaging.common.signal.public_meal_base import PublicMealSignalBase
-
 from cynthus.messaging.common.signal.domain_type import SignalDomainType
+from cynthus.messaging.common.signal.public_meal_base import PublicMealSignalBase
 
 
 def test_is_an_abstract_signal_base():

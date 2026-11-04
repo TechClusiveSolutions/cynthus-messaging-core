@@ -4,10 +4,8 @@
 
 import pytest
 
-from cynthus.messaging.common.signal.base import SignalBase
-from cynthus.messaging.common.signal.public_meal_suggestion_base import PublicMealSuggestionSignalBase
-
 from cynthus.messaging.common.signal.public_meal_base import PublicMealSignalBase
+from cynthus.messaging.common.signal.public_meal_suggestion_base import PublicMealSuggestionSignalBase
 
 
 def test_is_an_abstract_signal_base():

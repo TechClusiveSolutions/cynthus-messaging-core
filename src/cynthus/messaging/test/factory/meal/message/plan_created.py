@@ -28,15 +28,14 @@ from uuid import UUID
 
 import pytest
 
+from cynthus.messaging.common.signal.lifecycle_action import LifecycleAction
 from cynthus.messaging.component.meal.message.meal_plan_created import (
     MealPlanCreatedMessage,
 )
 from cynthus.messaging.component.meal.payload.plan.meal_plan_created import (
     MealPlanCreatedPayload,
 )
-from cynthus.messaging.common.signal.lifecycle_action import LifecycleAction
 from cynthus.messaging.test.fixture.signal_message import default_envelope
-
 
 # ---------------------------------------------------------------------------
 # Canned scenario — standard 7-day Astri-assisted week plan
