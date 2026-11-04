@@ -16,11 +16,11 @@ All signals travel on the **Azure Service Bus** (AMQP). The bus is partitioned i
 
 | Topic | Purpose |
 |---|---|
-| `cynthus-topic-public` | Open-source Core signals. Consumed by any authorized service. |
+| `cynthus-events-topic` | Open-source Core signals. Consumed by any authorized service. |
 | `cynthus-topic-internal` | Closed-source Intelligence and Health signals. Payload is opaque to open-source consumers. |
 | `cynthus-topic-audit` | Append-only compliance events. Separate retention and integrity policies. |
 
-This package covers **`cynthus-topic-public`** signals only. Internal and audit signals are defined in the private `cynthus-messaging-internal` wheel.
+This package covers **`cynthus-events-topic`** signals only. Internal and audit signals are defined in the private `cynthus-messaging-internal` wheel.
 
 ---
 

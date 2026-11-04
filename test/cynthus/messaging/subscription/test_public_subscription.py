@@ -23,8 +23,21 @@ def test_name_is_passed_through(public_subscription):
 
 
 def test_always_subscribes_to_the_public_topic(public_subscription):
-    assert public_subscription(name='cynthus-sub').topic.name == 'cynthus-topic-public'
+    assert public_subscription(name='cynthus-sub').topic.name == 'cynthus-events-topic'
 
 
 def test_extra_options_are_forwarded(public_subscription):
     assert public_subscription(name='cynthus-sub', lock_duration=30).options == {'lock_duration': 30}
+
+
+def test_does_not_import_faststream_azure():
+    import ast
+    import inspect
+
+    import cynthus.messaging.subscription.public_subscription as module
+
+    imported = [
+        node.module for node in ast.walk(ast.parse(inspect.getsource(module))) if isinstance(node, ast.ImportFrom)
+    ]
+
+    assert 'faststream.azure' not in imported

@@ -13,11 +13,11 @@ def test_is_a_pydantic_model():
 
 
 def test_name_is_the_public_service_bus_topic():
-    assert CoreSignalTopic().name == 'cynthus-topic-public'
+    assert CoreSignalTopic().name == 'cynthus-events-topic'
 
 
 def test_name_default_is_also_available_on_the_class():
-    assert CoreSignalTopic.model_fields['name'].default == 'cynthus-topic-public'
+    assert CoreSignalTopic.model_fields['name'].default == 'cynthus-events-topic'
 
 
 def test_name_can_be_overridden():

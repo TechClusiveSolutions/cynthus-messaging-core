@@ -4,6 +4,6 @@ from .public_subscription import PublicSubscription
 
 
 class CoreLogisticsSignalSubscription(PublicSubscription):
-    """Represents `cynthus-core-logistics`'s subscription to `cynthus-topic-public`."""
+    """Represents `cynthus-core-logistics`'s subscription to `cynthus-events-topic`."""
 
     name: str = 'cynthus-sub-core-logistics'

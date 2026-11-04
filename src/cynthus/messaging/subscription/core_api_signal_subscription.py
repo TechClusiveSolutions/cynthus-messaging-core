@@ -4,6 +4,6 @@ from .public_subscription import PublicSubscription
 
 
 class CoreAPISignalSubscription(PublicSubscription):
-    """Represents `cynthus-core-api`'s subscription to `cynthus-topic-public`."""
+    """Represents `cynthus-core-api`'s subscription to `cynthus-events-topic`."""
 
-    name: str = 'cynthus-sub-core-api'
+    name: str = 'cynthus-api-sub'

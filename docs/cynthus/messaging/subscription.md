@@ -1,6 +1,6 @@
 # Subscription Classes
 
-Each service that consumes from `cynthus-topic-public` has a dedicated subscription class. All concrete subscription classes extend `PublicSubscription`, which extends FastStream's `AzureServiceBusSubscription`.
+Each service that consumes from `cynthus-events-topic` has a dedicated subscription class. All concrete subscription classes extend `PublicSubscription`, which extends FastStream's `AzureServiceBusSubscription`.
 
 A subscription class's only responsibility is to declare the correct queue name for its service. The topic binding is handled by `PublicSubscription`.
 
@@ -18,7 +18,7 @@ class PublicSubscription(AzureServiceBusSubscription):
         super().__init__(name=name, topic=PublicTopic(), **kwargs)
 ```
 
-**Topic:** `cynthus-topic-public` (via `CoreSignalTopic`, aliased as `PublicTopic`)
+**Topic:** `cynthus-events-topic` (via `CoreSignalTopic`, aliased as `PublicTopic`)
 
 ---
 

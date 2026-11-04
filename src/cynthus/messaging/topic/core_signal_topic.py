@@ -5,9 +5,9 @@ from pydantic import BaseModel
 
 class CoreSignalTopic(BaseModel):
     """
-        Represents the cynthus-topic-public Azure Service Bus topic
+        Represents the cynthus-events-topic Azure Service Bus topic
 
         Domain facts published here are open: any authorized downstream service may consume them.
     """
 
-    name: str = 'cynthus-topic-public'
+    name: str = 'cynthus-events-topic'

@@ -30,7 +30,7 @@ def test_subscription_name_follows_the_naming_convention(subscription_class):
 
 
 def test_subscribes_to_the_public_topic(subscription_class):
-    assert subscription_class().topic.name == 'cynthus-topic-public'
+    assert subscription_class().topic.name == 'cynthus-events-topic'
 
 
 def test_extra_options_are_forwarded(subscription_class):
