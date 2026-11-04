@@ -1,0 +1,2 @@
+from .inventory_list_requested import InventoryListRequestedMessage
+from .inventory_list_updated import InventoryListUpdatedMessage

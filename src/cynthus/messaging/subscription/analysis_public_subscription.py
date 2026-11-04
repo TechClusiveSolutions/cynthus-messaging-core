@@ -4,7 +4,7 @@ from cynthus.messaging.subscription.public_subscription import PublicSubscriptio
 
 
 class AnalysisPublicSubscription(PublicSubscription):
-    """Represents cynthus-analysis's subscription to cynthus-topic-public."""
+    """Represents cynthus-analysis's subscription to cynthus-events-topic."""
 
     def __init__(self, **kwargs) -> None:
         super().__init__(name='cynthus-analysis-public-sub', **kwargs)

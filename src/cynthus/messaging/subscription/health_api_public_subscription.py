@@ -4,7 +4,7 @@ from cynthus.messaging.subscription.public_subscription import PublicSubscriptio
 
 
 class HealthApiPublicSubscription(PublicSubscription):
-    """Represents cynthus-health-api's subscription to cynthus-topic-public."""
+    """Represents cynthus-health-api's subscription to cynthus-events-topic."""
 
     def __init__(self, **kwargs) -> None:
         super().__init__(name='cynthus-health-api-public-sub', **kwargs)
