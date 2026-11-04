@@ -1,6 +1,6 @@
 # Meal Domain Signals
 
-The `meal` domain covers the full lifecycle of meal planning, AI-driven suggestions, group voting, user ratings, and recipe associations. All signals in this domain are published to `cynthus-topic-public` and carry the prefix `public.meal.*`.
+The `meal` domain covers the full lifecycle of meal planning, AI-driven suggestions, group voting, user ratings, and recipe associations. All signals in this domain are published to `cynthus-events-topic` and carry the prefix `public.meal.*`.
 
 ---
 

@@ -31,7 +31,7 @@ def test_name_follows_the_core_naming_convention(subscription_class):
 
 
 def test_subscribes_to_the_public_topic(subscription_class):
-    assert subscription_class().topic.name == 'cynthus-topic-public'
+    assert subscription_class().topic.name == 'cynthus-events-topic'
 
 
 def test_the_name_can_still_be_overridden(subscription_class):

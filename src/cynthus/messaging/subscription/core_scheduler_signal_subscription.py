@@ -4,6 +4,6 @@ from .public_subscription import PublicSubscription
 
 
 class CoreSchedulerSignalSubscription(PublicSubscription):
-    """Represents `cynthus-core-scheduler`'s subscription to `cynthus-topic-public`."""
+    """Represents `cynthus-core-scheduler`'s subscription to `cynthus-events-topic`."""
 
     name: str = 'cynthus-sub-core-scheduler'

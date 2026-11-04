@@ -6,6 +6,10 @@ from .lifecycle_action import LifecycleAction
 from .message import SignalMessage
 from .payload import SignalPayload
 
+# Inventory Lists
+from .public_inventory_list_requested import PublicInventoryListRequestedSignal
+from .public_inventory_list_updated import PublicInventoryListUpdatedSignal
+
 # Meal Plans
 from .public_meal_plan_created import PublicMealPlanCreatedSignal
 from .public_meal_plan_deleted import PublicMealPlanDeletedSignal

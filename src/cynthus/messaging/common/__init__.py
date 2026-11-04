@@ -2,6 +2,8 @@ from .signal import (
     DecisionReason,
     EnergyLevel,
     LifecycleAction,
+    PublicInventoryListRequestedSignal,
+    PublicInventoryListUpdatedSignal,
     PublicMealPlanCreatedSignal,
     PublicMealPlanDeletedSignal,
     PublicMealPlanUpdatedSignal,
