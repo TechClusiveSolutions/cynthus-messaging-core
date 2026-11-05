@@ -7,6 +7,9 @@ from .audit_identity_access_rejected import AuditIdentityAccessRejectedSignal
 from .audit_identity_token_issued import AuditIdentityTokenIssuedSignal
 from .audit_identity_user_authenticated import AuditIdentityUserAuthenticatedSignal
 from .audit_identity_user_rejected import AuditIdentityUserRejectedSignal
+
+# Profile
+from .audit_profile_hard_constraint_updated import AuditProfileHardConstraintUpdatedSignal
 from .decision_reason import DecisionReason
 from .domain_type import SignalDomainType
 from .energy_level import EnergyLevel
@@ -71,4 +74,10 @@ from .public_meal_vote_auto_resolved import PublicMealVoteAutoResolvedSignal
 from .public_meal_vote_cast import PublicMealVoteCastSignal
 from .public_meal_vote_initiated import PublicMealVoteInitiatedSignal
 from .public_meal_vote_resolved import PublicMealVoteResolvedSignal
+from .public_profile_profile_created import PublicProfileProfileCreatedSignal
+from .public_profile_profile_deleted import PublicProfileProfileDeletedSignal
+from .public_profile_profile_requested import PublicProfileProfileRequestedSignal
+from .public_profile_profile_responded import PublicProfileProfileRespondedSignal
+from .public_profile_profile_updated import PublicProfileProfileUpdatedSignal
+from .public_profile_snapshot_published import PublicProfileSnapshotPublishedSignal
 from .trigger_type import SignalTriggerType

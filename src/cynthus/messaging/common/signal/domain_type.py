@@ -9,3 +9,4 @@ class SignalDomainType(str, Enum):
     IDENTITY: str = 'identity'
     INVENTORY: str = 'inventory'
     MEAL: str = 'meal'
+    PROFILE: str = 'profile'
