@@ -24,10 +24,11 @@ Logger = stdlib.Logger
 DEFAULT_LEVEL = 'INFO'
 DEFAULT_FORMAT = '%(asctime)s %(levelname)-8s %(name)s - %(message)s'
 DEFAULT_DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+DEFAULT_AZURE_LEVEL = 'WARNING'
 
 __all__ = [
     'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG', 'Logger',
-    'DEFAULT_LEVEL', 'DEFAULT_FORMAT', 'DEFAULT_DATE_FORMAT',
+    'DEFAULT_LEVEL', 'DEFAULT_FORMAT', 'DEFAULT_DATE_FORMAT', 'DEFAULT_AZURE_LEVEL',
     'configure', 'getLogger',
 ]
 
@@ -70,6 +71,9 @@ def configure(
         datefmt=datefmt or DEFAULT_DATE_FORMAT,
         force=force,
     )
+
+    # The Azure SDK logs every AMQP frame and HTTP exchange at INFO
+    stdlib.getLogger('azure').setLevel(_resolve_level(environ.get('AZURE_LOG_LEVEL') or DEFAULT_AZURE_LEVEL))
 
     _configured = True
 
