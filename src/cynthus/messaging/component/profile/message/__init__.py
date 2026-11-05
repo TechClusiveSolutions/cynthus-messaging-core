@@ -1,0 +1,7 @@
+from .profile_created import ProfileCreatedMessage
+from .profile_deleted import ProfileDeletedMessage
+from .profile_hard_constraint_updated import ProfileHardConstraintUpdatedMessage
+from .profile_requested import ProfileRequestedMessage
+from .profile_responded import ProfileRespondedMessage
+from .profile_snapshot_published import ProfileSnapshotPublishedMessage
+from .profile_updated import ProfileUpdatedMessage
