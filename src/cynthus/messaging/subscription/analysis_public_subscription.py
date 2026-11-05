@@ -7,4 +7,4 @@ class AnalysisPublicSubscription(PublicSubscription):
     """Represents cynthus-analysis's subscription to cynthus-events-topic."""
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(name='cynthus-analysis-public-sub', **kwargs)
+        super().__init__(name='cynthus-analysis-sub', **kwargs)
