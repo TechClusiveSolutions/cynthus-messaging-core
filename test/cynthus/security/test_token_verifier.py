@@ -97,3 +97,9 @@ def test_the_defaults_point_at_the_auth_service(monkeypatch):
     assert verifier.jwks_url == 'http://auth:8000/.well-known/jwks.json'
     assert (verifier.issuer, verifier.audience) == ('cynthus-auth', 'cynthus')
     client.assert_called_once()
+
+
+def test_the_token_id_is_carried_into_the_claims(verifier, issuer, identity):
+    issued = issuer.issue_token(**identity)
+
+    assert verifier.verify_sync(issued.token).token_id == issued.token_id

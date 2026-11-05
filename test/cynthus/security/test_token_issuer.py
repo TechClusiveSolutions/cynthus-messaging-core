@@ -36,3 +36,17 @@ def test_the_key_id_is_stable_for_the_same_key(private_pem):
 
 def test_different_keys_have_different_ids(private_pem, other_private_pem):
     assert TokenIssuer(private_pem, 'a', 'b').key_id != TokenIssuer(other_private_pem, 'a', 'b').key_id
+
+
+def test_every_token_has_its_own_id_that_issue_token_reports(issuer, identity):
+    first, second = issuer.issue_token(**identity), issuer.issue_token(**identity)
+
+    assert first.token_id != second.token_id
+    assert jwt.decode(first.token, options={'verify_signature': False})['jti'] == first.token_id
+    assert (first.key_id, first.expires_in) == (issuer.key_id, 60)
+
+
+def test_issue_returns_just_the_token_string(issuer, identity):
+    token = issuer.issue(**identity)
+
+    assert isinstance(token, str) and 'jti' in jwt.decode(token, options={'verify_signature': False})

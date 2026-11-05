@@ -71,6 +71,7 @@ class TokenVerifier:
                 subject=payload['sub'],
                 organization_id=payload['organization_id'],
                 workspace_id=payload['workspace_id'],
+                token_id=payload.get('jti'),
                 roles=payload.get('roles', []),
                 permissions=payload.get('permissions', []),
                 issued_at=payload['iat'],

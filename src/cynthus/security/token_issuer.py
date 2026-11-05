@@ -4,11 +4,13 @@ import base64
 import hashlib
 import time
 from typing import Any, Dict, Iterable
-from uuid import UUID
+from uuid import UUID, uuid4
 
 import jwt
 from cryptography.hazmat.primitives import serialization
 from jwt.algorithms import RSAAlgorithm
+
+from .issued_token import IssuedToken
 
 ALGORITHM = 'RS256'
 
@@ -38,12 +40,24 @@ class TokenIssuer:
         roles: Iterable[str] = (),
         permissions: Iterable[str] = (),
     ) -> str:
+        return self.issue_token(subject, organization_id, workspace_id, roles, permissions).token
+
+    def issue_token(
+        self,
+        subject: UUID,
+        organization_id: UUID,
+        workspace_id: UUID,
+        roles: Iterable[str] = (),
+        permissions: Iterable[str] = (),
+    ) -> IssuedToken:
         issued_at = int(time.time())
+        token_id = str(uuid4())
 
         claims = {
             'iss': self.issuer,
             'aud': self.audience,
             'sub': str(subject),
+            'jti': token_id,
             'iat': issued_at,
             'exp': issued_at + self.ttl_seconds,
             'organization_id': str(organization_id),
@@ -52,7 +66,9 @@ class TokenIssuer:
             'permissions': list(permissions),
         }
 
-        return jwt.encode(claims, self._private_key, algorithm=ALGORITHM, headers={'kid': self.key_id})
+        token = jwt.encode(claims, self._private_key, algorithm=ALGORITHM, headers={'kid': self.key_id})
+
+        return IssuedToken(token=token, token_id=token_id, key_id=self.key_id, expires_in=self.ttl_seconds)
 
     def jwks(self) -> Dict[str, Any]:
         key = RSAAlgorithm.to_jwk(self._private_key.public_key(), as_dict=True)

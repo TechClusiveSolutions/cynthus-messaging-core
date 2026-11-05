@@ -30,3 +30,8 @@ def test_roles_default_to_none():
 def test_claims_cannot_be_changed():
     with pytest.raises(ValidationError):
         _claims().workspace_id = uuid.uuid4()
+
+
+def test_the_token_id_is_optional():
+    assert _claims().token_id is None
+    assert _claims(token_id='t1').token_id == 't1'
