@@ -19,14 +19,14 @@ def test_is_a_public_subscription(subscription_class, import_or_xfail):
 
 
 def test_subscription_name(subscription_class):
-    assert subscription_class().name == 'cynthus-analysis-public-sub'
+    assert subscription_class().name == 'cynthus-analysis-sub'
 
 
 def test_subscription_name_follows_the_naming_convention(subscription_class):
     name = subscription_class().name
 
     assert name.startswith('cynthus-')
-    assert name.endswith('-public-sub')
+    assert name.endswith('-sub')
 
 
 def test_subscribes_to_the_public_topic(subscription_class):
