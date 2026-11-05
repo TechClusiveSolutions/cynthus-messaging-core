@@ -84,8 +84,9 @@ def fake(monkeypatch):
     server = FakeRedis()
     opened = []
 
-    def from_url(url):
+    def from_url(url, **options):
         opened.append(url)
+        server.options = options
 
         return server
 
@@ -101,6 +102,16 @@ def test_clients_for_the_same_url_share_one_pool(fake):
 
     assert first.client is second.client
     assert fake.opened == ['redis://one']
+
+
+def test_the_pool_recovers_from_dropped_connections(fake):
+    RedisClient('redis://one')
+
+    assert fake.options['health_check_interval'] == redis_module.HEALTH_CHECK_INTERVAL_SECONDS
+    assert fake.options['socket_keepalive'] is True
+    assert fake.options['retry'] is not None
+    assert redis_module.RedisConnectionError in fake.options['retry_on_error']
+    assert redis_module.RedisTimeoutError in fake.options['retry_on_error']
 
 
 def test_clients_for_different_urls_do_not_share(fake):
