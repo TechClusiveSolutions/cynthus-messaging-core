@@ -13,6 +13,7 @@ from cynthus.messaging.topic import CoreSignalTopic
 LOGGER = logging.getLogger(__name__)
 
 AUTHORIZATION = 'authorization'
+CLIENT_ATTRIBUTE = '_cynthus_signal_publisher'
 
 
 class SignalPublisher:
@@ -28,6 +29,19 @@ class SignalPublisher:
         self._topic = CoreSignalTopic()
         self._sender = None
         self._opening = None
+
+    @classmethod
+    def for_client(cls, client: ServiceBusClient) -> 'SignalPublisher':
+        """The publisher that belongs to `client`, created the first time it is asked for."""
+
+        # Kept on the client itself: the publisher and the client refer to each other, and both go when the client does
+        publisher = vars(client).get(CLIENT_ATTRIBUTE)
+
+        if publisher is None:
+            publisher = cls(client)
+            setattr(client, CLIENT_ATTRIBUTE, publisher)
+
+        return publisher
 
     @classmethod
     def from_environment(cls) -> 'SignalPublisher':

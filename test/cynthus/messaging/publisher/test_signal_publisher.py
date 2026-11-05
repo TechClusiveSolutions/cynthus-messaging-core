@@ -174,3 +174,39 @@ async def test_a_sender_that_will_not_close_does_not_stop_the_close():
     await publisher.close()
 
     client.close.assert_awaited_once()
+
+
+def test_everyone_who_shares_a_client_shares_its_publisher():
+    client, _ = _client()
+    other, _ = _client()
+
+    assert SignalPublisher.for_client(client) is SignalPublisher.for_client(client)
+    assert SignalPublisher.for_client(client) is not SignalPublisher.for_client(other)
+    assert SignalPublisher.for_client(client)._client is client
+
+
+@pytest.mark.asyncio
+async def test_a_shared_publisher_keeps_one_sender_across_callers():
+    client, sent = _client()
+
+    await SignalPublisher.for_client(client).publish(_message())
+    await SignalPublisher.for_client(client).publish(_message())
+
+    assert len(sent) == 2
+    client.get_topic_sender.assert_called_once()
+
+
+def test_a_publisher_and_its_client_are_released_together():
+    import gc
+    import weakref
+
+    class Client:
+        pass
+
+    client = Client()
+    reference = weakref.ref(SignalPublisher.for_client(client))
+
+    del client
+    gc.collect()
+
+    assert reference() is None
