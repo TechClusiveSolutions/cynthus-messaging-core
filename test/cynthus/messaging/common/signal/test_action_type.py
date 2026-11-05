@@ -24,6 +24,7 @@ MEMBERS = [
     ('REMOVED', 'removed'),
     ('REQUESTED', 'requested'),
     ('RESOLVED', 'resolved'),
+    ('RESPONDED', 'responded'),
     ('UPDATED', 'updated'),
 ]
 

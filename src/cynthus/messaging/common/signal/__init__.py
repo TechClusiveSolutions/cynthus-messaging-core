@@ -17,6 +17,10 @@ from .payload import SignalPayload
 # Inventory Items
 from .public_inventory_item_added import PublicInventoryItemAddedSignal
 from .public_inventory_item_removed import PublicInventoryItemRemovedSignal
+
+# Inventory Requests
+from .public_inventory_item_requested import PublicInventoryItemRequestedSignal
+from .public_inventory_item_responded import PublicInventoryItemRespondedSignal
 from .public_inventory_item_updated import PublicInventoryItemUpdatedSignal
 
 # Inventory Lists
@@ -26,11 +30,17 @@ from .public_inventory_list_updated import PublicInventoryListUpdatedSignal
 # Inventory Locations
 from .public_inventory_location_created import PublicInventoryLocationCreatedSignal
 from .public_inventory_location_deleted import PublicInventoryLocationDeletedSignal
+from .public_inventory_location_requested import PublicInventoryLocationRequestedSignal
+from .public_inventory_location_responded import PublicInventoryLocationRespondedSignal
 from .public_inventory_location_updated import PublicInventoryLocationUpdatedSignal
+from .public_inventory_owner_requested import PublicInventoryOwnerRequestedSignal
+from .public_inventory_owner_responded import PublicInventoryOwnerRespondedSignal
 
 # Inventory Shelves
 from .public_inventory_shelf_created import PublicInventoryShelfCreatedSignal
 from .public_inventory_shelf_deleted import PublicInventoryShelfDeletedSignal
+from .public_inventory_shelf_requested import PublicInventoryShelfRequestedSignal
+from .public_inventory_shelf_responded import PublicInventoryShelfRespondedSignal
 from .public_inventory_shelf_updated import PublicInventoryShelfUpdatedSignal
 
 # Meal Plans
