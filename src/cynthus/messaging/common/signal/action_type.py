@@ -23,4 +23,5 @@ class SignalActionType(str, Enum):
     REMOVED: str = 'removed'
     REQUESTED: str = 'requested'
     RESOLVED: str = 'resolved'
+    RESPONDED: str = 'responded'
     UPDATED: str = 'updated'

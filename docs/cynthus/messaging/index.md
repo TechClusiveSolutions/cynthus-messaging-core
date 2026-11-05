@@ -85,6 +85,7 @@ docs/cynthus/messaging/
 │   │   └── access.md           ← identity.access.* signals
 │   ├── inventory/
 │   │   ├── index.md            ← inventory domain overview
+│   │   ├── request.md          ← inventory request and response signals
 │   │   ├── location.md         ← inventory.location.* signals
 │   │   ├── shelf.md            ← inventory.shelf.* signals
 │   │   └── item.md             ← inventory.item.* signals
