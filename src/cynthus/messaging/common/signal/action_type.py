@@ -19,6 +19,7 @@ class SignalActionType(str, Enum):
     GRANTED: str = 'granted'
     INITIATED: str = 'initiated'
     ISSUED: str = 'issued'
+    PUBLISHED: str = 'published'
     REJECTED: str = 'rejected'
     REMOVED: str = 'removed'
     REQUESTED: str = 'requested'

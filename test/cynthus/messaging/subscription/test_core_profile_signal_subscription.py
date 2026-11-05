@@ -19,15 +19,17 @@ def test_is_a_public_subscription(subscription_class, import_or_xfail):
 
 
 def test_declares_the_subscription_name(subscription_class):
-    assert subscription_class.name == 'cynthus-sub-core-profile'
+    assert subscription_class.name == 'cynthus-profile-sub'
 
 
 def test_can_be_created_without_arguments(subscription_class):
-    assert subscription_class().name == 'cynthus-sub-core-profile'
+    assert subscription_class().name == 'cynthus-profile-sub'
 
 
-def test_name_follows_the_core_naming_convention(subscription_class):
-    assert subscription_class().name.startswith('cynthus-sub-core-')
+def test_name_follows_the_service_naming_convention(subscription_class):
+    name = subscription_class().name
+
+    assert name.startswith('cynthus-') and name.endswith('-sub')
 
 
 def test_subscribes_to_the_public_topic(subscription_class):
