@@ -6,5 +6,6 @@ from enum import Enum
 class SignalDomainType(str, Enum):
     """Standardized signal domain mutations"""
 
+    IDENTITY: str = 'identity'
     INVENTORY: str = 'inventory'
     MEAL: str = 'meal'
