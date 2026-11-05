@@ -15,6 +15,7 @@ Services trust the signed access token only (engineering standards, section 4). 
 | `RequirePermission` | services with HTTP routes | FastAPI dependency: `Depends(RequirePermission('inventory:read'))` verifies the bearer token and the permission. |
 | `AccessDenied` | services with HTTP routes | 401 or 403 error; register `access_denied_handler` to answer `{"error": ...}`. |
 | `AccessRecorder` | services that audit access | Hook told about every granted, rejected and denied decision. Does nothing until a service subclasses it. |
+| `SignalAccessRecorder` | API and Inventory services | An `AccessRecorder` that publishes `audit.identity.access.granted`, `.rejected` and `.denied` through a `SignalPublisher`. |
 | `BearerToken` | services that read HTTP headers or message properties | Extracts the token from an `Authorization: Bearer <token>` value. |
 | `TokenError` | all | Raised for any token that is missing, malformed, expired or not trusted. Carries a short `reason`. |
 
