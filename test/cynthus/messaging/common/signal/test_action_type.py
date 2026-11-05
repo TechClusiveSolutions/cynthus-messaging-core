@@ -20,6 +20,7 @@ MEMBERS = [
     ('GRANTED', 'granted'),
     ('INITIATED', 'initiated'),
     ('ISSUED', 'issued'),
+    ('PUBLISHED', 'published'),
     ('REJECTED', 'rejected'),
     ('REMOVED', 'removed'),
     ('REQUESTED', 'requested'),
