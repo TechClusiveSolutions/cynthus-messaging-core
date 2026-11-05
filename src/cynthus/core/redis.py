@@ -8,10 +8,16 @@ from typing import Any
 from urllib.parse import quote
 
 from redis import asyncio as aioredis
+from redis.asyncio.retry import Retry
+from redis.backoff import ExponentialBackoff
+from redis.exceptions import ConnectionError as RedisConnectionError
+from redis.exceptions import TimeoutError as RedisTimeoutError
 
 Value = str | list[Any] | dict[str, Any]
 
 DEFAULT_EXPIRY_SECONDS = 3600
+HEALTH_CHECK_INTERVAL_SECONDS = 30
+RETRY_ATTEMPTS = 3
 
 
 class RedisClient:
@@ -29,12 +35,27 @@ class RedisClient:
         client = self.clients.get(url)
 
         if client is None:
-            client = aioredis.from_url(url)
+            client = aioredis.from_url(url, **self.connection_options())
 
             self.clients[url] = client
 
         self.url = url
         self.client = client
+
+    @staticmethod
+    def connection_options() -> dict[str, Any]:
+        """Pool settings that let the client survive a connection the server or network has dropped.
+
+        Idle connections are checked before reuse and kept alive at the socket level, and a command that fails
+        on a broken connection is retried (on a fresh connection) with a short backoff.
+        """
+
+        return {
+            'health_check_interval': HEALTH_CHECK_INTERVAL_SECONDS,
+            'socket_keepalive': True,
+            'retry': Retry(ExponentialBackoff(cap=1, base=0.05), RETRY_ATTEMPTS),
+            'retry_on_error': [RedisConnectionError, RedisTimeoutError],
+        }
 
     @classmethod
     def from_environment(cls) -> 'RedisClient':
