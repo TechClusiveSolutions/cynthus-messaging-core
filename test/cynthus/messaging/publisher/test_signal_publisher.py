@@ -87,3 +87,90 @@ async def test_close_closes_the_client():
     await SignalPublisher(client).close()
 
     client.close.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_one_sender_is_opened_and_reused_for_every_message():
+    client, sent = _client()
+    publisher = SignalPublisher(client)
+
+    for _ in range(3):
+        await publisher.publish(_message())
+
+    assert len(sent) == 3
+    client.get_topic_sender.assert_called_once_with(topic_name='cynthus-events-topic')
+    client.get_topic_sender.return_value.__aenter__.assert_awaited_once()
+    client.get_topic_sender.return_value.__aexit__.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_messages_published_together_still_share_one_sender():
+    import asyncio
+
+    client, sent = _client()
+    publisher = SignalPublisher(client)
+
+    await asyncio.gather(*(publisher.publish(_message()) for _ in range(5)))
+
+    assert len(sent) == 5
+    client.get_topic_sender.assert_called_once()
+
+
+@pytest.mark.asyncio
+async def test_a_dropped_link_is_replaced_and_the_message_is_sent_again():
+    client, sent = _client()
+    sender = client.get_topic_sender.return_value
+    calls = {'count': 0}
+
+    async def flaky(message):
+        calls['count'] += 1
+
+        if calls['count'] == 2:
+            raise RuntimeError('link detached')
+
+        sent.append(message)
+
+    sender.send_messages = AsyncMock(side_effect=flaky)
+    publisher = SignalPublisher(client)
+
+    await publisher.publish(_message())
+    await publisher.publish(_message())
+
+    assert len(sent) == 2
+    assert client.get_topic_sender.call_count == 2
+    sender.__aexit__.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_a_failure_on_the_fresh_sender_is_raised():
+    client, _ = _client()
+    client.get_topic_sender.return_value.send_messages = AsyncMock(side_effect=RuntimeError('bus is down'))
+
+    with pytest.raises(RuntimeError, match='bus is down'):
+        await SignalPublisher(client).publish(_message())
+
+    assert client.get_topic_sender.call_count == 2
+
+
+@pytest.mark.asyncio
+async def test_close_closes_the_open_sender_before_the_client():
+    client, _ = _client()
+    publisher = SignalPublisher(client)
+    await publisher.publish(_message())
+
+    await publisher.close()
+
+    client.get_topic_sender.return_value.__aexit__.assert_awaited_once()
+    client.close.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_a_sender_that_will_not_close_does_not_stop_the_close():
+    client, _ = _client()
+    publisher = SignalPublisher(client)
+    await publisher.publish(_message())
+    client.get_topic_sender.return_value.__aexit__ = AsyncMock(side_effect=RuntimeError('already closed'))
+
+    await publisher.close()
+
+    client.close.assert_awaited_once()
