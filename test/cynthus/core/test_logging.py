@@ -15,6 +15,8 @@ def basic_config(monkeypatch):
     monkeypatch.setattr(cynthus_logging, '_configured', False)
     monkeypatch.delenv('LOG_LEVEL', raising=False)
     monkeypatch.delenv('LOG_FORMAT', raising=False)
+    monkeypatch.delenv('AZURE_LOG_LEVEL', raising=False)
+    monkeypatch.setattr(stdlib.getLogger('azure'), 'level', stdlib.NOTSET)
 
     return calls
 
@@ -80,3 +82,17 @@ def test_the_standard_names_are_re_exported():
     assert cynthus_logging.INFO == stdlib.INFO
     assert cynthus_logging.DEBUG == stdlib.DEBUG
     assert cynthus_logging.Logger is stdlib.Logger
+
+
+def test_the_azure_sdk_is_quieted_by_default():
+    cynthus_logging.configure()
+
+    assert stdlib.getLogger('azure').level == stdlib.WARNING
+
+
+def test_the_azure_level_can_be_overridden(monkeypatch):
+    monkeypatch.setenv('AZURE_LOG_LEVEL', 'debug')
+
+    cynthus_logging.configure()
+
+    assert stdlib.getLogger('azure').level == stdlib.DEBUG

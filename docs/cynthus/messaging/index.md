@@ -78,6 +78,17 @@ docs/cynthus/messaging/
 ├── common/
 │   └── primitives.md           ← SignalBase, SignalMessage, SignalPayload, all enums
 ├── component/
+│   ├── identity/
+│   │   ├── index.md            ← identity domain overview
+│   │   ├── user.md             ← identity.user.* signals
+│   │   ├── token.md            ← identity.token.* signals
+│   │   └── access.md           ← identity.access.* signals
+│   ├── inventory/
+│   │   ├── index.md            ← inventory domain overview
+│   │   ├── request.md          ← inventory request and response signals
+│   │   ├── location.md         ← inventory.location.* signals
+│   │   ├── shelf.md            ← inventory.shelf.* signals
+│   │   └── item.md             ← inventory.item.* signals
 │   └── meal/
 │       ├── index.md            ← meal domain overview and signal flow
 │       ├── plan.md             ← meal.plan.* signals
