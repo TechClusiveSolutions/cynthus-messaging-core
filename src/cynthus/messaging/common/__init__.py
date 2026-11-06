@@ -21,6 +21,8 @@ from .signal import (
     PublicInventoryLocationRequestedSignal,
     PublicInventoryLocationRespondedSignal,
     PublicInventoryLocationUpdatedSignal,
+    PublicInventoryOwnerAddedSignal,
+    PublicInventoryOwnerRemovedSignal,
     PublicInventoryOwnerRequestedSignal,
     PublicInventoryOwnerRespondedSignal,
     PublicInventoryShelfCreatedSignal,

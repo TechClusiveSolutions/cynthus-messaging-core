@@ -12,6 +12,7 @@ The `inventory` domain covers storage locations, the shelves within them, and th
 | `location` | `public.inventory.location.*` | A location is a named physical storage space such as a pantry, fridge or freezer. |
 | `shelf` | `public.inventory.shelf.*` | A shelf is a subdivision of a location that holds items and has owners. |
 | `item` | `public.inventory.item.*` | An item is a quantity of a product held on a shelf. |
+| `owner` | `public.inventory.owner.*` | An owner is a user who is responsible for a shelf. |
 
 Asking the Inventory service to create, get, list, update or delete these records is done with the request and response signals described in [request.md](request.md).
 
