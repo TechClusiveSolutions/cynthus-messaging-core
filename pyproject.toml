@@ -1,3 +1,12 @@
+[project]
+name = "cynthus"
+version = "0.0.0"
+requires-python = ">=3.11"
+# Only what the shared package imports but its users may not otherwise install; services pin the release tag.
+dependencies = [
+    "sqlalchemy[asyncio]",
+]
+
 [tool.ruff]
 line-length = 120
 target-version = "py311"
