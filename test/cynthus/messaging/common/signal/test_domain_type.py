@@ -7,7 +7,9 @@ import pytest
 from cynthus.messaging.common.signal.domain_type import SignalDomainType
 
 MEMBERS = [
+    ('ANALYSIS', 'analysis'),
     ('IDENTITY', 'identity'),
+    ('INTELLIGENCE', 'intelligence'),
     ('INVENTORY', 'inventory'),
     ('MEAL', 'meal'),
     ('PROFILE', 'profile'),
