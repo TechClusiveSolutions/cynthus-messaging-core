@@ -29,6 +29,7 @@ class SignalPublisher:
         self._topic = CoreSignalTopic()
         self._sender = None
         self._opening = None
+        self._sending = None
 
     @classmethod
     def for_client(cls, client: ServiceBusClient) -> 'SignalPublisher':
@@ -73,22 +74,36 @@ class SignalPublisher:
                 application_properties=properties,
             )
 
-        try:
-            await (await self._open()).send_messages(build())
-        except Exception:
-            # The link may have been dropped since the last message: start again on a fresh sender, once
-            LOGGER.getChild('publish').warning('Sending %s failed; retrying on a new sender', signal_message.event_type)
+        # A sender is not safe for concurrent sends: overlapping sends make one fail and shut the sender down for the
+        # others, and each failure would then open (and orphan) another connection. One message at a time.
+        async with self._send_lock():
+            sender = None
 
-            await self._discard()
+            try:
+                sender = await self._open()
+                await sender.send_messages(build())
+            except Exception:
+                # The link may have been dropped since the last message: start again on a fresh sender, once
+                LOGGER.getChild('publish').warning(
+                    'Sending %s failed; retrying on a new sender', signal_message.event_type
+                )
 
-            await (await self._open()).send_messages(build())
+                await self._discard(sender)
+
+                await (await self._open()).send_messages(build())
 
     async def close(self) -> None:
-        await self._discard()
+        await self._discard(self._sender)
         await self._client.close()
 
         if self._credential is not None:
             await self._credential.close()
+
+    def _send_lock(self) -> asyncio.Lock:
+        if self._sending is None:
+            self._sending = asyncio.Lock()
+
+        return self._sending
 
     def _lock(self) -> asyncio.Lock:
         # Created on first use so the publisher can be built before an event loop is running
@@ -101,17 +116,31 @@ class SignalPublisher:
         async with self._lock():
             if self._sender is None:
                 sender = self._client.get_topic_sender(topic_name=self._topic.name)
-                await sender.__aenter__()
+
+                try:
+                    await sender.__aenter__()
+                except BaseException:
+                    # A sender that failed to open still holds what it started; close it rather than orphan it
+                    await self._close_quietly(sender)
+
+                    raise
+
                 self._sender = sender
 
             return self._sender
 
-    async def _discard(self) -> None:
+    async def _discard(self, sender) -> None:
+        """Closes `sender`, which failed or is being retired, and forgets it only if it is still the current one."""
+
         async with self._lock():
-            sender, self._sender = self._sender, None
+            if self._sender is sender:
+                self._sender = None
 
         if sender is not None:
-            try:
-                await sender.__aexit__(None, None, None)
-            except Exception:
-                LOGGER.getChild('_discard').debug('The sender was already closed', exc_info=True)
+            await self._close_quietly(sender)
+
+    async def _close_quietly(self, sender) -> None:
+        try:
+            await sender.__aexit__(None, None, None)
+        except Exception:
+            LOGGER.getChild('_close_quietly').debug('The sender was already closed', exc_info=True)

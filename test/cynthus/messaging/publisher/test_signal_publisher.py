@@ -1,3 +1,4 @@
+import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -210,3 +211,110 @@ def test_a_publisher_and_its_client_are_released_together():
     gc.collect()
 
     assert reference() is None
+
+
+def _tracking_client():
+    """A client whose senders record how many sends run at once and which were closed."""
+
+    state = {'senders': [], 'active': 0, 'peak': 0}
+
+    def make_sender(**_):
+        sender = MagicMock()
+        sender.closed = False
+
+        async def send(message):
+            state['active'] += 1
+            state['peak'] = max(state['peak'], state['active'])
+            await asyncio.sleep(0.01)
+            state['active'] -= 1
+
+        async def close(*_):
+            sender.closed = True
+
+        sender.send_messages = AsyncMock(side_effect=send)
+        sender.__aenter__ = AsyncMock(return_value=sender)
+        sender.__aexit__ = AsyncMock(side_effect=close)
+        state['senders'].append(sender)
+
+        return sender
+
+    client = MagicMock()
+    client.get_topic_sender = MagicMock(side_effect=make_sender)
+
+    return client, state
+
+
+@pytest.mark.asyncio
+async def test_overlapping_publishes_share_one_sender_and_never_send_at_once():
+    client, state = _tracking_client()
+    publisher = SignalPublisher(client)
+
+    await asyncio.gather(*(publisher.publish(_message()) for _ in range(5)))
+
+    assert len(state['senders']) == 1
+    assert state['peak'] == 1
+    assert state['senders'][0].send_messages.await_count == 5
+
+
+@pytest.mark.asyncio
+async def test_a_failed_send_retries_on_a_new_sender_and_closes_the_failed_one():
+    client, state = _tracking_client()
+    publisher = SignalPublisher(client)
+
+    await publisher.publish(_message())
+    state['senders'][0].send_messages.side_effect = RuntimeError('link dropped')
+
+    await publisher.publish(_message())
+
+    first, second = state['senders']
+    assert first.closed
+    assert not second.closed
+    second.send_messages.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_overlapping_publishes_after_a_failure_leave_one_open_sender():
+    client, state = _tracking_client()
+    publisher = SignalPublisher(client)
+
+    await publisher.publish(_message())
+    state['senders'][0].send_messages.side_effect = RuntimeError('link dropped')
+
+    await asyncio.gather(*(publisher.publish(_message()) for _ in range(4)))
+
+    assert [sender.closed for sender in state['senders']].count(False) == 1
+
+
+@pytest.mark.asyncio
+async def test_a_sender_that_fails_to_open_is_closed_not_orphaned():
+    client, state = _tracking_client()
+    sender_factory = client.get_topic_sender.side_effect
+
+    def failing(**kwargs):
+        sender = sender_factory(**kwargs)
+        sender.__aenter__ = AsyncMock(side_effect=RuntimeError('quota'))
+
+        return sender
+
+    client.get_topic_sender.side_effect = failing
+
+    with pytest.raises(RuntimeError):
+        await SignalPublisher(client).publish(_message())
+
+    assert all(sender.closed for sender in state['senders'])
+
+
+@pytest.mark.asyncio
+async def test_discarding_a_stale_sender_does_not_close_the_current_one():
+    client, state = _tracking_client()
+    publisher = SignalPublisher(client)
+    await publisher.publish(_message())
+    current = state['senders'][0]
+    stale = MagicMock()
+    stale.__aexit__ = AsyncMock(return_value=False)
+
+    await publisher._discard(stale)
+
+    stale.__aexit__.assert_awaited_once()
+    assert not current.closed
+    assert publisher._sender is current
